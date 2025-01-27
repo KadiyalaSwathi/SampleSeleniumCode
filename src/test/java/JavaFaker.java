@@ -1,5 +1,9 @@
 import com.github.javafaker.Faker;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Locale;
 
 public class JavaFaker {
@@ -41,6 +45,17 @@ public class JavaFaker {
        System.out.println(getEmail());
        System.out.println(getMobileNumber());
 
+    }
+
+    public static String dateOfBirth() {
+        Faker faker = new Faker();
+        // Generate a random date of birth
+        Date randomDate = faker.date().birthday(18, 56);
+        // Convert Date to LocalDate
+        LocalDate localDate = randomDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        // Format LocalDate to yyyy-MM-dd
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        return localDate.format(formatter);
     }
 
 
